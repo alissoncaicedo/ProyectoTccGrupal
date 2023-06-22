@@ -3,8 +3,6 @@ package com.example.proyectogrupal.Entidades;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table (name = "Bodega")
 public class Bodega {
@@ -23,24 +21,20 @@ public class Bodega {
     @Column(name="Ubicacion",nullable = false, length =50 )
     private String Ubicacion;
 
-    @OneToMany(mappedBy = "Bodega")
-    private List<Mercancia> mercancia;
-
-
+    @OneToOne(mappedBy = "Bodega", cascade = CascadeType.ALL)
+    @JoinColumn
+    private Bodega bodega;
 
     public Bodega() {
     }
 
-    public Bodega(Integer id, String controEntrada, String controlSalida, String ubicacion, List<Mercancia> mercancia) {
+    public Bodega(Integer id, String controEntrada, String controlSalida, String ubicacion, Bodega bodega) {
         this.id = id;
         ControEntrada = controEntrada;
         ControlSalida = controlSalida;
         Ubicacion = ubicacion;
-        this.mercancia = mercancia;
+        this.bodega = bodega;
     }
-
-    @Transient
-    private String mensjeError;
 
     public Integer getId() {
         return id;
@@ -74,19 +68,11 @@ public class Bodega {
         Ubicacion = ubicacion;
     }
 
-    public List<Mercancia> getMercancia() {
-        return mercancia;
+    public Bodega getBodega() {
+        return bodega;
     }
 
-    public void setMercancia(List<Mercancia> mercancia) {
-        this.mercancia = mercancia;
-    }
-
-    public String getMensjeError() {
-        return mensjeError;
-    }
-
-    public void setMensjeError(String mensjeError) {
-        this.mensjeError = mensjeError;
+    public void setBodega(Bodega bodega) {
+        this.bodega = bodega;
     }
 }

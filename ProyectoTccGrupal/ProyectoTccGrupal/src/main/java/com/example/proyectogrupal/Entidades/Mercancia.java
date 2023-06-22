@@ -1,6 +1,5 @@
 package com.example.proyectogrupal.Entidades;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
@@ -31,9 +30,9 @@ public class Mercancia {
     @Column(name="VolumenOcupado",nullable = false, length =50 )
     private String VolumenOcupado;
 
-    @OneToOne(optional = false,fetch = FetchType.LAZY)
-    @JoinColumn(name="bodega",nullable = false)
-    @JsonBackReference
+
+    @OneToOne(mappedBy = "Mercancia", cascade = CascadeType.ALL)
+    @JoinColumn
     private Bodega bodega;
 
     public Mercancia() {

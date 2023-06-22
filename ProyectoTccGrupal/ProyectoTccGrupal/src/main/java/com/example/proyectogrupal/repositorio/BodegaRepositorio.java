@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BodegaRepositorio extends JpaRepository<Bodega, Integer> {
-    
 
 }
